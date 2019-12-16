@@ -23,6 +23,16 @@ class ImageModel:
 
         return merged_image.tobytes()
 
+    def process_image(self, img1, img2):
+        if img2:
+            image = self.merge_images(img1, img2)
+        else:
+            image = img1
+
+        # Example script to add the timestamp to the image
+        # https://github.com/jepoirrier/miscScripts/blob/master/timestampFiles.py
+
+
     @staticmethod
     def convert_bytes_to_image(image_request_bytes):
         try:

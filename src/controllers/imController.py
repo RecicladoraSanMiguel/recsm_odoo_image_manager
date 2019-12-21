@@ -20,7 +20,7 @@ class ImageController:
             if img1["request"].is_valid() and img2["request"].is_valid():
                 image = self.imageM.process_image(img1["image"], img2["image"])
 
-            return {"cam1": img1, "cam2": img2, "image": image}
+            return {"cam1": img1["request"], "cam2": img2["request"], "image": image}
 
         else:
             img1 = self.get_web_image(self._cam1)
@@ -28,7 +28,7 @@ class ImageController:
             if img1["request"].is_valid():
                 image = self.imageM.process_image(img1["image"])
 
-            return {"cam1": img1, "image": image}
+            return {"cam1": img1["request"], "image": image}
 
     def get_web_image(self, cam):
         image = False

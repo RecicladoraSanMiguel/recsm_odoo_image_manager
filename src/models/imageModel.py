@@ -54,7 +54,7 @@ class ImageModel:
             image = self.merge_images(img1, ImageModel.get_rbga_image(img2))
 
         image = self._add_image_timestamp(image, True if img2 else False)
-        image.show()
+
         return image.tobytes()
 
     @staticmethod

@@ -1,5 +1,7 @@
 from src.im import IM
 
-im = IM({"ip": "[camera ip]", "user": "[camera user]", "passwd": "[camera password]"})
+im = IM({"ip": "192.168.2.151", "user": "admin", "passwd": "lacapri001"})
 
 img = im.get_image()
+
+print(im)

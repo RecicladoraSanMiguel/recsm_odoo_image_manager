@@ -1,5 +1,5 @@
-from src.models import ImageModel
-from src.modules.http import HTTP
+from ..models import ImageModel
+from ..modules.http import HTTP
 
 
 class ImageController:

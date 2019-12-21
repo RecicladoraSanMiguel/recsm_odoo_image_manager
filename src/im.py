@@ -1,4 +1,4 @@
-from src.controllers import ImageController
+from .controllers import ImageController
 
 
 class IM:

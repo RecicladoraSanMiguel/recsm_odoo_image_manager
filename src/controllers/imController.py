@@ -1,21 +1,20 @@
-from ..models import ImageModel
-from ..models import WebModel
-from ..modules.http import HTTP
+from src.models import ImageModel
+from src.modules.http import HTTP
 
 
 class ImageController:
 
     def __init__(self, cam1, cam2):
         self._cam1 = self.set_camera(cam1)
-        self._cam2 = self.set_camera(cam2)
+        self._cam2 = self.set_camera(cam2) if cam2 else False
         self._http = HTTP()
-        self.webM = WebModel()
         self.imageM = ImageModel()
 
     def get_image(self):
         image = False
+        img1 = self.get_web_image(self._cam1)
+
         if self._cam2:
-            img1 = self.get_web_image(self._cam1)
             img2 = self.get_web_image(self._cam2)
 
             if img1["request"].is_valid() and img2["request"].is_valid():
@@ -42,11 +41,11 @@ class ImageController:
         return {"request": image_request, "image": image}
 
     def set_camera(self, cam):
-        cam_conn_string = self.get_camera_url(cam["ip"], cam["user"], cam["passw"])
+        cam_conn_string = self.get_camera_url(cam["ip"], cam["user"], cam["passwd"])
         return cam_conn_string
 
     @staticmethod
-    def get_camera_url(ip, user, passw, secure=False):
+    def get_camera_url(ip, user, passwd, secure=False):
         protocol = ("http", "https")[secure]
-        return protocol + "://" + ip + "/cgi-bin/api.cgi?cmd=Snap&channel=0&rs=wuuPhkmUCeI9WG7C&user=" + user + "&password=" + passw
+        return protocol + "://" + ip + "/cgi-bin/api.cgi?cmd=Snap&channel=0&rs=wuuPhkmUCeI9WG7C&user=" + user + "&password=" + passwd
         # http://192.168.2.32/cgi-bin/api.cgi?cmd=Snap&channel=0&rs=wuuPhkmUCeI9WG7C&user=admin&password=lacapri001

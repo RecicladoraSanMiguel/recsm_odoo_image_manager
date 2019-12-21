@@ -1,9 +1,9 @@
-from .controllers import ImageController
+from src.controllers import ImageController
 
 
 class IM:
 
-    def __init__(self, cam1 = {}, cam2 = {}):
+    def __init__(self, cam1, cam2={}):
         self.initClass = False
 
         if cam1:

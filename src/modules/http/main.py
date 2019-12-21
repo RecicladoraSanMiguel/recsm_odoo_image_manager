@@ -19,7 +19,7 @@ class HTTP:
                 if _type == "POST":
                     _response = requests.post(url, headers=headers, data=payload, timeout=30)
                 else:
-                    _response = requests.get(url, headers=headers, timeout=30)
+                    _response = requests.get(url, headers=headers, timeout=15)
 
                 return HTTPResp(_response)
 

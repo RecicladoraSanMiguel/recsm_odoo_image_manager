@@ -1,6 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
 from datetime import datetime
+import base64
 
 import os
 
@@ -55,7 +56,10 @@ class ImageModel:
 
         image = self._add_image_timestamp(image, True if img2 else False)
 
-        return image.tobytes()
+        output = BytesIO()
+        image.save(output, format='PNG')
+
+        return base64.b64encode(output.getvalue())
 
     @staticmethod
     def get_rbga_image(img):
@@ -70,4 +74,3 @@ class ImageModel:
             print(e)
             print("== End of Exception ==")
             return False
-

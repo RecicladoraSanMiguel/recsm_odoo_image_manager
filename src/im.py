@@ -3,10 +3,10 @@ from .controllers import ImageController
 
 class IM:
 
-    def __init__(self, cam1 = {}, cam2 = {}):
+    def __init__(self, cam1, cam2={}):
         self.initClass = False
 
-        if cam1 and cam2:
+        if cam1:
             self.imCtrl = ImageController(cam1, cam2)
             self.initClass = True
 

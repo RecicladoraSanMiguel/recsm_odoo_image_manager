@@ -1,6 +1,9 @@
 from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
 from datetime import datetime
+from pytz import timezone
+from ..config import constants
+
 import base64
 
 import os
@@ -57,9 +60,19 @@ class ImageModel:
         image = self._add_image_timestamp(image, True if img2 else False)
 
         output = BytesIO()
+
+        if constants.DEBUG:
+            image.show()
+
         image.save(output, format='PNG')
 
         return base64.b64encode(output.getvalue())
+
+    @staticmethod
+    def get_local_time():
+        tz = timezone(constants.TIMEZONE)
+        local_time = datetime.now(tz)
+        return local_time.strftime('%d/%m/%Y %H:%M:%S')
 
     @staticmethod
     def get_rbga_image(img):
